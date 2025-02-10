@@ -1,5 +1,6 @@
 --Silver Engine
 --by A5TR0spud
+-- designed for figura 0.1.5 rc 6 fabric 1.21.4, accomodating the bugs, but should work for older/other versions
 
 vanilla_model.PLAYER:setVisible(false)
 vanilla_model.ARMOR:setVisible(false)
@@ -7,11 +8,6 @@ vanilla_model.CAPE:setVisible(false)
 vanilla_model.ELYTRA:setVisible(false)
 
 local smogParticle = "minecraft:campfire_cosy_smoke"
-
---entity init event, used for when the avatar entity is loaded for the first time
-function events.entity_init()
-  --player functions goes here
-end
 
 local t = 0
 local st = 0
@@ -25,15 +21,12 @@ local makeSnow = false
 local mainPage = action_wheel:newPage()
 action_wheel:setPage(mainPage)
 
-local scarfTex = textures:get("Skin_Scarfed.png")
 local smokeEnabled = true
 
 function pings.TankScarfToggle(x)
   showingTank = not x
   models.model.root.Body.Tank:setVisible(not x)
   models.model.root.Cape:setVisible(x)
-  --print(textures:getTextures())
-  --print(scarfTex)
   if x then
     models.model.root.Body:setPrimaryTexture("CUSTOM", textures:getTextures()[2])
   else
@@ -85,7 +78,6 @@ end
 
 local food = -1
 
---tick event, called 20 times per second
 function events.tick()
   plrSpd = (player:getVelocity() * vectors:vec3(1, 0, 1)):length()
 
@@ -102,7 +94,7 @@ function events.tick()
     food = player:getFood()
     pings.SetTankFill(food)
   end
-  
+  -- world:getBiome does not seem to work
   --local pos = player:getPos()
   --local bio = world:getBiome(pos)
   --local wat = bio:getWaterColor()
