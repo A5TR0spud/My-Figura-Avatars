@@ -3,21 +3,11 @@ vanilla_model.ARMOR:setVisible(false)
 vanilla_model.HELMET_ITEM:setVisible(true)
 vanilla_model.CAPE:setVisible(false)
 vanilla_model.ELYTRA:setVisible(false)
-
 local antenna_on = true
 local c_a_ticks = 0
 local rec_on = true
 local t_r_ticks = 0
-local rad_ticks = 0
-local rad_on = 1
-
 local has_sent_death_receipt = false
-
-function events.entity_init()
-  if not animations.model.battery_engine:isPlaying() then
-    animations.model.battery_engine:play()
-  end
-end
 
 function events.tick()
   if not has_sent_death_receipt and player:getHealth() <= 0 then
@@ -38,20 +28,17 @@ function events.tick()
   end
 
   c_a_ticks = c_a_ticks + 1
-  if (math.random() < 0.3 or c_a_ticks > 20) and c_a_ticks > 1 then
+  if (math.random() < 0.45 or c_a_ticks > 12) and c_a_ticks > 1 then
     antenna_on = not antenna_on
     c_a_ticks = 0
-    models.model.root.Body.Antenna:setUVPixels(antenna_on and 0 or 1, 0)
+    models.model.root.Head.Antenna:setUVPixels(antenna_on and 0 or 1, 0)
+    models.model.root.Body.BigAntenna:setUVPixels(math.random(0, 1), 0)
+    models.model.root.Body.BodyAntenna:setUVPixels(math.random(0, 1), 0)
   end
   if t_r_ticks % 20 == 0 then
     rec_on = not rec_on
     models.model.root.Head.RecLight:setUVPixels(rec_on and 0 or 1, 0)
   end
-  if rad_ticks % 29 == 0 then
-    rad_on = 1 - rad_on
-    models.model.root.Body.BodyAntenna:setUVPixels(rad_on, 0)
-  end
-  rad_ticks = rad_ticks + 1
   t_r_ticks = t_r_ticks + 1
   
 end
