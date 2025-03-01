@@ -18,16 +18,21 @@ local t_r_ticks = 0
 local has_sent_death_receipt = false
 
 
-local function scan(mask, k_id)
-  if not host:isHost() then
-    do return end
-  end
-  print("Scanning...")
-end
-local scan_bind = keybinds:newKeybind("Scan", "key.keyboard.c")
-  :onPress(scan)
+--local function scan(mask, k_id)
+--  if not host:isHost() then
+--    do return end
+--  end
+--  print("Scanning...")
+--end
+--local scan_bind = keybinds:newKeybind("Scan", "key.keyboard.c")
+--  :onPress(scan)
 --
 
+--function events.entity_init()
+--  if not animations.model.battery_engine:isPlaying() then
+--    animations.model.battery_engine:play()
+--  end
+--end
 
 function events.tick()
   if not has_sent_death_receipt and player:getHealth() <= 0 then
@@ -52,6 +57,7 @@ function events.tick()
     antenna_on = not antenna_on
     c_a_ticks = 0
     models.model.root.Head.Antenna:setUVPixels(antenna_on and 0 or 1, 0)
+    models.model.root.Body.BodyAntenna:setUVPixels(math.random(0, 1), 0)
   end
   if t_r_ticks % 20 == 0 then
     rec_on = not rec_on
