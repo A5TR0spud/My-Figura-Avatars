@@ -16,8 +16,6 @@ function events.tick()
   end
   rollRot = rollRot + rollDir * rollSpd
   t = t + 1
-
-  models.model.root.RightArm.RightItemPivot:setVisible(IsFlipping())
 end
 
 function events.render(delta, context)
