@@ -91,7 +91,6 @@ events.TICK:register(function ()
 
   local samePos = seedBlock == nil or seedBlock[2] == newPos
 
-  seedBlock = tryAddBlock(newPos, 0)
 
   local recalc = true
   if not samePos then
@@ -107,6 +106,9 @@ events.TICK:register(function ()
     end
     end
   end
+
+  
+  seedBlock = tryAddBlock(newPos, 0)
 
   local _index = 1
   while recalc and _index <= #trackedBlocks do
