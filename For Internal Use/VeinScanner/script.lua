@@ -60,8 +60,8 @@ local function tryAddBlock(pos, dist)
       do return value end
     end
   end
-  if dist > 16 and #trackedBlocks > 24 then do return nil end end
-  if dist > 48 or #trackedBlocks > 64 then do return nil end end
+  if dist > 8 and #trackedBlocks > 24 then do return nil end end
+  if dist > 16 or #trackedBlocks > 64 then do return nil end end
   local blockStore = {id, pos, 0, nil, pos, dist}
   if seedBlock ~= nil then
     blockStore[5] = seedBlock[2]
@@ -91,7 +91,6 @@ events.TICK:register(function ()
 
   local samePos = seedBlock == nil or seedBlock[2] == newPos
 
-
   local recalc = true
   if not samePos then
     for index, value in ipairs(trackedBlocks) do
@@ -107,7 +106,6 @@ events.TICK:register(function ()
     end
   end
 
-  
   seedBlock = tryAddBlock(newPos, 0)
 
   local _index = 1
@@ -121,43 +119,43 @@ events.TICK:register(function ()
       value[3] = value[3] + 1
       local dist = value[6]
       if value[3] == 1 then
-        tryAddBlock(value[2] + vectors:vec3(0, 0, -1), dist + 3)
-        tryAddBlock(value[2] + vectors:vec3(0, 0, 1), dist + 3)
-        tryAddBlock(value[2] + vectors:vec3(0, -1, 0), dist + 3)
-        tryAddBlock(value[2] + vectors:vec3(0, 1, 0), dist + 3)
-        tryAddBlock(value[2] + vectors:vec3(-1, 0, 0), dist + 3)
-        tryAddBlock(value[2] + vectors:vec3(1, 0, 0), dist + 3)
+        tryAddBlock(value[2] + vectors:vec3(0, 0, -1), dist + 1)
+        tryAddBlock(value[2] + vectors:vec3(0, 0, 1), dist + 1)
+        tryAddBlock(value[2] + vectors:vec3(0, -1, 0), dist + 1)
+        tryAddBlock(value[2] + vectors:vec3(0, 1, 0), dist + 1)
+        tryAddBlock(value[2] + vectors:vec3(-1, 0, 0), dist + 1)
+        tryAddBlock(value[2] + vectors:vec3(1, 0, 0), dist + 1)
       elseif value[3] == 2 then
-        tryAddBlock(value[2] + vectors:vec3(0, -1, -1), dist + 4)
-        tryAddBlock(value[2] + vectors:vec3(0, -1, 1), dist + 4)
-        tryAddBlock(value[2] + vectors:vec3(0, 1, -1), dist + 4)
-        tryAddBlock(value[2] + vectors:vec3(0, 1, 1), dist + 4)
+        tryAddBlock(value[2] + vectors:vec3(0, -1, -1), dist + 1.4)
+        tryAddBlock(value[2] + vectors:vec3(0, -1, 1), dist + 1.4)
+        tryAddBlock(value[2] + vectors:vec3(0, 1, -1), dist + 1.4)
+        tryAddBlock(value[2] + vectors:vec3(0, 1, 1), dist + 1.4)
 
-        tryAddBlock(value[2] + vectors:vec3(-1, -1, 0), dist + 4)
-        tryAddBlock(value[2] + vectors:vec3(-1, 1, 0), dist + 4)
-        tryAddBlock(value[2] + vectors:vec3(1, -1, 0), dist + 4)
-        tryAddBlock(value[2] + vectors:vec3(1, 1, 0), dist + 4)
+        tryAddBlock(value[2] + vectors:vec3(-1, -1, 0), dist + 1.4)
+        tryAddBlock(value[2] + vectors:vec3(-1, 1, 0), dist + 1.4)
+        tryAddBlock(value[2] + vectors:vec3(1, -1, 0), dist + 1.4)
+        tryAddBlock(value[2] + vectors:vec3(1, 1, 0), dist + 1.4)
 
-        tryAddBlock(value[2] + vectors:vec3(-1, 0, -1), dist + 4)
-        tryAddBlock(value[2] + vectors:vec3(-1, 0, 1), dist + 4)
-        tryAddBlock(value[2] + vectors:vec3(1, 0, -1), dist + 4)
-        tryAddBlock(value[2] + vectors:vec3(1, 0, 1), dist + 4)
+        tryAddBlock(value[2] + vectors:vec3(-1, 0, -1), dist + 1.4)
+        tryAddBlock(value[2] + vectors:vec3(-1, 0, 1), dist + 1.4)
+        tryAddBlock(value[2] + vectors:vec3(1, 0, -1), dist + 1.4)
+        tryAddBlock(value[2] + vectors:vec3(1, 0, 1), dist + 1.4)
       elseif value[3] == 3 then
-        tryAddBlock(value[2] + vectors:vec3(-1, -1, -1), dist + 5)
-        tryAddBlock(value[2] + vectors:vec3(-1, -1, 1), dist + 5)
-        tryAddBlock(value[2] + vectors:vec3(-1, 1, -1), dist + 5)
-        tryAddBlock(value[2] + vectors:vec3(-1, 1, 1), dist + 5)
-        tryAddBlock(value[2] + vectors:vec3(1, -1, -1), dist + 5)
-        tryAddBlock(value[2] + vectors:vec3(1, -1, 1), dist + 5)
-        tryAddBlock(value[2] + vectors:vec3(1, 1, -1), dist + 5)
-        tryAddBlock(value[2] + vectors:vec3(1, 1, 1), dist + 5)
+        tryAddBlock(value[2] + vectors:vec3(-1, -1, -1), dist + 1.7)
+        tryAddBlock(value[2] + vectors:vec3(-1, -1, 1), dist + 1.7)
+        tryAddBlock(value[2] + vectors:vec3(-1, 1, -1), dist + 1.7)
+        tryAddBlock(value[2] + vectors:vec3(-1, 1, 1), dist + 1.7)
+        tryAddBlock(value[2] + vectors:vec3(1, -1, -1), dist + 1.7)
+        tryAddBlock(value[2] + vectors:vec3(1, -1, 1), dist + 1.7)
+        tryAddBlock(value[2] + vectors:vec3(1, 1, -1), dist + 1.7)
+        tryAddBlock(value[2] + vectors:vec3(1, 1, 1), dist + 1.7)
       end
     end
     _index = _index + 1
   end
   local trackedNumText = "".. #trackedBlocks
-  if #trackedBlocks == 65 then
-    trackedNumText = "64+"
+  if #trackedBlocks > 64 then
+    trackedNumText = ">64"
   end
   seedNum:setText(trackedNumText)
   seedNum:setVisible(seedBlock ~= nil)
